@@ -6,3 +6,5 @@
 
 # Ignore object files
 *.o
+
+__pycache__/
