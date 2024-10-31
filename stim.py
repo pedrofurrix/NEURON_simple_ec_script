@@ -38,48 +38,47 @@ def setupstims(cell):
 
 
 
-def squarestim(cell,ton,dp,num,amp1,amp2):
+def squarestim(cell,ton,freq,num,amp1,amp2):
   fsquare=h.Fsquare(cell.soma(0.5))
-  #fsquare.x= h._ref_is_xtra
-  h("setpointer fsquare.x, is_xtra")
-  
-  #h.setpointer(fsquare._ref_x,h._ref_is_xtra) #chatgpt suggestion - testing 
+  # h("setpointer fsquare.x, is_xtra")
+  fsquare._ref_x=h._ref_is_xtra 
+
   #ton  time at which first cycle starts
   #dp   duration of a phase (duration of a half cycle)
   #num  number of cycles
   #amp1 level for first half cycle
   #amp2 level for second half cycle
-  id=2
+  dp=1/(freq/1000)
   fsquare.ton=ton
   fsquare.dp=dp
   fsquare.num=num
   fsquare.amp1=amp1
   fsquare.amp2=amp2
-  global fsquarex
-  fsquarex=h.Vector().record(fsquare._ref_x) #try to record the values of x #is kinda buggy with the other one - can write a plot(x) function
-  return(id)
+  #global fsquarex
+  #fsquarex=h.Vector().record(fsquare._ref_x) #try to record the values of x #is kinda buggy with the other one - can write a plot(x) function
+  return fsquare
 
 def sinstim(cell,ton,nc,f0,amp):
   fzap=h.Fzap(cell.soma(0.5))
   fzap._ref_x=h._ref_is_xtra #this is the syntax they use in tstpnt1.py
-  #h.setpointer(h._ref_is_xtra, 'x',fzap)S
+  # h.setpointer(h._ref_is_xtra, 'x',fzap)
   #h("setpointer fzap.x, is_xtra") #try to use the HOC function they use in 239006
-
-  #tp 	duration of a single phase of square or sine wave
+  #tp 	period
   #nc 	number of full cycles of sine wave
   #f0   initial frequency
   #f1   final frequencys
   #amp  amplitude
   id=1
-  tp=1/(f0*2)
+  tp=1/(f0/1000)#f0 is in Hz and tp in ms
   fzap.ton = ton #1
-  fzap.dur = tp*nc*2 #TP*2*NC
+  fzap.dur = tp*nc #TP*2*NC
   fzap.f0 = f0  #1000/2/TP
   fzap.f1 = fzap.f0
   fzap.amp=amp
   #global fzapx
   #fzapx=h.Vector().record(fzap._ref_x) #try to record the values of x #is kinda buggy with the other one - can write a plot(x) function
   #return(id)
+  return fzap
 
 def plotx(id,t):
   plt.Figure()
@@ -134,6 +133,7 @@ def simpleplaysin(amp,dt,tstop,freq):
   print(list(t))
   print(list(stim1))
   stim1.play(h._ref_is_xtra,t,0)
+  return t,stim1
 
 
 
