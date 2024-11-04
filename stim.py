@@ -8,24 +8,24 @@ tvec = h.Vector(6)
 
 #ton is starting point
 #dur is the duration of the stimulus
-#grad is the amplitude
+#amp is the amplitude
 
-def makestim(ton, dur, grad):
+def makestim(ton, dur, amp):
   tvec.from_python([0, ton, ton,      ton+dur,  ton+dur, ton+dur+1])
   # 1e3 ensures that grad = 1 produces potential gradient 1 mv/um
-  gvec.from_python([0, 0,   grad, grad, 0,       0])
+  gvec.from_python([0, 0,   amp, amp, 0,       0])
 
 
-def stimplay(ton,dur,grad,simtime):
-  makestim(ton,dur,grad)
+def stimplay(ton,dur,amp,simtime):
+  makestim(ton,dur,amp)
   gvec.play(h._ref_is_xtra, tvec, 1)
-  plotvector(gvec,tvec,simtime,grad)
+  plotvector(gvec,tvec,simtime,amp)
 
-def stimplay2(ton,dur,grad): #two-part stimulation, with part positive and part negative
+def stimplay2(ton,dur,amp): #two-part stimulation, with part positive and part negative
   gvec.resize(8)
   tvec.resize(8)
   tvec.from_python([0, ton, ton, ton+dur/2, ton+dur/2, ton+dur, ton+dur, ton+dur+1])
-  gvec.from_python([0, 0,   grad, grad,-grad,-grad, 0,       0])
+  gvec.from_python([0, 0,   amp, amp,-amp,-amp, 0,       0])
   gvec.play(h._ref_is_xtra, tvec, 1)
 
 '''

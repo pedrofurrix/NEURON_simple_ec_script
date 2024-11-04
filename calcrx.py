@@ -100,14 +100,14 @@ def set_uniform_field_between_plates(v_plate,distance,field_orientation,ref_poin
             for seg in sec:
 
                 # Calculate displacement from the zero potential reference
-                displacement = np.array([seg.x_xtra - ref_x, seg.y_xtra - ref_y, seg.z_xtra - ref_z])   
+                displacement = np.array([seg.x_xtra - ref_x, seg.y_xtra - ref_y, seg.z_xtra - ref_z]) #um  
 
                 # Calculate the component of displacement in the direction of the field
                 field_component = np.dot(displacement, field_orientation)
                 
                 # Set the transfer resistance using the constant field, using a i amplitude of 1 mA
                 #look at the explanation for the negative sign in the notes (25/10)
-                seg.rx_xtra = e_field_strength * field_component*1e-6 #mV #use minus sign - look at explanation
+                seg.rx_xtra = e_field_strength * field_component*1e-6 #kV, 1e-6 is there for the conversion #use minus sign - look at explanation
                 #Should I include a rho factor??? 
                 #(supposedly, basically, as it is, a current of 1mA will make it so that V has the nominal value of rx_xtra always)
                 #1e-6 is just to neutralize the other conversion factor

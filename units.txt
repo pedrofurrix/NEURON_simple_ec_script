@@ -1,0 +1,101 @@
+ballandstick.py
+====Position==== 
+x,y,z - um
+theta - rad
+L,diam - um
+
+====Biophysics====
+Ra - Axial resistance in Ohm * cm
+cm - Membrane capacitance in micro Farads / cm^2
+gm -
+
+====Hodgkin-Huxley====
+gnabar - Sodium conductance in S/cm2
+gkbar - Potassium conductance in S/cm2
+gl -  Leak conductance in S/cm2
+el - Reversal potential in mV
+
+====Passive====
+g - Passive conductance in S/cm2
+e - Leak reversal potential mV
+
+
+====Extracellular Mechanism=====
+vext[0] - Extracellular voltage in mV
+i_membrane - Membrane current/area in mA/cm2
+extracellular.e - Extracellular potential in mV
+xraxial[nlayer] - Longitudinal extracellular resistance in MOhms/cm
+xg[nlayer] - Membrane Conductance in S/cm2
+xc[nlayer] - Membrane Capacitance in uF/cm2
+#xc[0] and xg[0] - net radial capacitance and conductance in the extracellular layer that is immediately adjacent to the cell membrane
+#xc[1] and xg[1] - net radial capacitance and conductance in the outer extracellular layer 
+#Default values are xg[i] = 1e9, xc[i] = 0.0 xraxial[i] = 1e9
+#They can be manipulated to simulate myelinization
+
+====xtra=====
+v - Membrane Potential in mV
+is - Global current for potential calculation in mA 
+ex - Extracellular potential in mV - connected to extracellular.e
+im - Membrane current/area in mA/cm2 - connected to extracellular i_membrane
+er - Recorded voltage from stimulation in uV
+area - um2 
+rx - Transfer resistance for potential calculation in MOhms
+Conversion factors - 1e6 for mA*MOhms to mV
+10 - MOhm*ma*1e9/cm2*um2*1e-8 to uV
+
+====calcrx====
+Rho - Medium Resistance in Ohm*cm
+b - distance  between electrodes in um # the function is not working atm
+c - distance between electrodes and axon in um
+[xe],[ye],[ze] - lists containing electrodes' positions in um
+#0.01 converts rho's cm to um and ohm to megohm
+rx_xtra assigned by setrx1 and homogenous in MOhms #homogenous is also wrong, don't use
+
+>>set_uniform_field_between_plates 
+v_plate - potential difference between the plates in mV 
+distance - distance between the plates in ums
+#Should I make this into V/m and do conversion?
+field_orientation - orientation of the E-field
+ref_point - 0 potential reference point
+displacement and field_component - absolute distance and distance in the direction of the field from the reference point in um
+rx_xtra - here, takes units of kV (equivalent to MOhm in the ex calculation equation) - considering the conversion factor.
+# Disregarding the conversion factors - unit is mV/Ohm
+# A current of 1mA will make it so that ex has the nominal value of rx_xtra
+#Here, rx_xtra can take negative values, to adjust for the difference in potential being negative in the direction of the E-field
+
+
+====main====
+dt - timestep in ms
+simtime - simulation time in ms
+
+
+====stim====
+>>stimplay
+ton - delay until stim start in ms
+dur - duration of stimulation in ms
+amp - stimulation amplitude in mA
+
+>>squarestim
+ton - delay in ms
+freq - Frequency of stimulation in Hz
+num - Number of full cycles 
+dp - duration of a half cycle - ms
+amp1 - positive cycle amplitude in mA 
+amp2 - negative cycle amplitude in mA
+
+>>sinstim
+ton - delay in ms
+tp - period of the sine wave in ms
+nc - number of full cycles of sine wave
+f0 - initial frequency in Hz
+f1 - final frequency in Hz
+amp - stimulation amplitude in mA
+
+>>playsin
+#will be changed to make it more adaptable.
+
+>>simpleplaysin
+tstop - stimulation time in ms
+dt - timestep in ms
+freq - stimulation frequency in Hz
+amp - stimulation amplitude in mA
