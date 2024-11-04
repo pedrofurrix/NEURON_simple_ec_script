@@ -2,7 +2,7 @@ import pandas as pd
 from neuron import h
 
 def savedata(id,t,soma_v,dend_v,v_extracellular,is_xtra,vrec):
-    filename=f"run{id}"
+    filename=f"run{id}.csv"
     path="./data/"+ filename
     data=pd.DataFrame({"t":t,"soma_v":soma_v,"dend_v":dend_v,"v_extracellular":v_extracellular,"is_xtra":is_xtra,"vrec":vrec})
     data.to_csv(path,index=False)

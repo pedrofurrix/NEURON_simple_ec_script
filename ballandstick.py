@@ -12,7 +12,8 @@ class Cell:
         h.define_shape()
         self._rotate_z(theta)
         self._set_position(x, y, z)
-        # everything below here in this method is NEW
+        # Spike detector - register the spikes associated with the cell
+        # can look to plot them in a scatter plot.
         self._spike_detector = h.NetCon(self.soma(0.5)._ref_v, None, sec=self.soma)
         self.spike_times = h.Vector()
         self._spike_detector.record(self.spike_times)
