@@ -52,9 +52,9 @@ c - distance between electrodes and axon in um
 rx_xtra assigned by setrx1 and homogenous in MOhms #homogenous is also wrong, don't use
 
 >>set_uniform_field_between_plates 
-v_plate - potential difference between the plates in mV 
-distance - distance between the plates in ums
-#Should I make this into V/m and do conversion?
+v_plate - potential difference between the plates in V 
+distance - distance between the plates in m
+#Converted to mV/um to give the field_strength
 field_orientation - orientation of the E-field
 ref_point - 0 potential reference point
 displacement and field_component - absolute distance and distance in the direction of the field from the reference point in um
@@ -92,7 +92,12 @@ f1 - final frequency in Hz
 amp - stimulation amplitude in mA
 
 >>playsin
-#will be changed to make it more adaptable.
+ton - delay to the start of stimulation in ms
+amp - stimulation amplitude in mA
+dt - timestep in ms
+dur - duration of stimulation in ms
+simtime - time of simulation in ms
+freq - freq of stimulation in Hz
 
 >>simpleplaysin
 tstop - stimulation time in ms
