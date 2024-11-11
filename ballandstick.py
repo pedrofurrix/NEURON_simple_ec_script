@@ -1,10 +1,6 @@
 from neuron import h
 from neuron.units import ms, mV,um
-import os
-current_directory = os.getcwd()
-print(current_directory)
-path=current_directory+"\mechanisms\nrnmech.dll"
-h.nrn_load_dll(path)
+
 
 class Cell:
     def __init__(self, gid, x, y, z, theta,nseg): 
