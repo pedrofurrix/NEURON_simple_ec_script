@@ -104,3 +104,13 @@ tstop - stimulation time in ms
 dt - timestep in ms
 freq - stimulation frequency in Hz
 amp - stimulation amplitude in mA
+
+>>amplitudemodulation
+ton - delay to the start of stimulation in ms
+amp - stimulation amplitude in mA
+depth - amplitude modulation depth between 0 and 1 (0 is minimum and 1 is maximum)
+dt - timestep in ms
+dur - duration of stimulation in ms
+simtime - time of simulation in ms
+freq - carrier frequency of stimulation in Hz
+modfreq - modulation frequency in Hz
