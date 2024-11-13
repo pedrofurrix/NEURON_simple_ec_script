@@ -26,6 +26,8 @@ def setrx2(rho,b,c):
 
 def setrx1(xe,ye,ze): #x,y,z are the electrode coordinates #it's wrong, see the representation
      #include more than one electrode
+     #works only for the case where the waveform is the same for multiple electrodes
+     #for different waveforms, see multiplesources
      #doesn't hold up if the waveforms are different - will have to see how I can do that
      #x,y and z in um and rt in MOhm (rho in ohm cm)
         for sec in h.allsec():
@@ -39,9 +41,9 @@ def setrx1(xe,ye,ze): #x,y,z are the electrode coordinates #it's wrong, see the 
         # this would be meaningless since the location would be inside the cell
         # so force r to be at least as big as local radius
                       #  r = h.diam(seg)/2 if r==0 else r=r
+                        if r==0:
+                            r=seg.diam/2
                         rt+=(rho / 4 / h.PI)*(1/r)*0.01
-                    if rt==0:
-                        rt=seg.diam/2
                     seg.rx_xtra = rt
 
 

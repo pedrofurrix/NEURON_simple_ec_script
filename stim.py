@@ -148,6 +148,7 @@ def ampmodulation(ton,amp,depth,dt,dur,simtime,freq,modfreq):
 #Variable start and end time for stimulation, defined by ton and dur
 #depth is between 0 and 1, with 1 being 100% mod depth
 #modfreq is in Hz
+#varies between 1+depth and 1-depth
 #Based on wikipedia definition of modulation index
 def ampmodulation_wiki(ton,amp,depth,dt,dur,simtime,freq,modfreq):
   times=np.arange(0,simtime+dt,dt)
