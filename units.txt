@@ -7,7 +7,7 @@ L,diam - um
 ====Biophysics====
 Ra - Axial resistance in Ohm * cm
 cm - Membrane capacitance in micro Farads / cm^2
-gm -
+gm - Membrane conductance in S/cm2
 
 ====Hodgkin-Huxley====
 gnabar - Sodium conductance in S/cm2
@@ -60,8 +60,8 @@ ref_point - 0 potential reference point
 displacement and field_component - absolute distance and distance in the direction of the field from the reference point in um
 rx_xtra - here, takes units of kV (equivalent to MOhm in the ex calculation equation) - considering the conversion factor.
 # Disregarding the conversion factors - unit is mV/Ohm
-# A current of 1mA will make it so that ex has the nominal value of rx_xtra
-#Here, rx_xtra can take negative values, to adjust for the difference in potential being negative in the direction of the E-field
+# A current with amplitude 1mA will make it so that ex has the nominal value of -E*distance (rx)* i(t)
+# Here, rx_xtra can take negative values, to adjust for the difference in potential being negative in the direction of the E-field
 
 
 ====main====

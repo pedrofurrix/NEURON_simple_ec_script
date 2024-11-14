@@ -113,5 +113,5 @@ def set_uniform_field_between_plates(v_plate,distance,field_orientation,ref_poin
                 #use minus sign - look at explanation - because the electric field is positive from + to -
                 # a dislocation in the direction of the electric field means the potential is reduced
                 #Should I include a rho factor??? 
-                #(supposedly, basically, as it is, a current of 1mA will make it so that V has the nominal value of rx_xtra always)
+                #(supposedly, basically, as it is, a current of 1mA will make it so that V has the nominal value of rx_xtra*1e6 always)
                 #1e-6 is just to neutralize the other conversion factor

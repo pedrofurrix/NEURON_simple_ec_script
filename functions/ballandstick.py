@@ -7,10 +7,10 @@ class Cell:
         self._gid = gid
         self._setup_morphology()
         self.all = self.soma.wholetree()
-        self._discretize()
+        self._discretize(nseg)
         self._setup_biophysics()
         self.x = self.y = self.z = 0
-        h.define_shape()
+        #h.define_shape()
         self._rotate_z(theta) 
         self._set_position(x, y, z) #x,y,z are in um
         # Spike detector - register the spikes associated with the cell
@@ -23,11 +23,16 @@ class Cell:
 
         self.soma_v = h.Vector().record(self.soma(0.5)._ref_v)
 
-    def _discretize(self):
+    def _discretize(self,nseg):
         '''for sec in  self.all:
             sec.nseg=nseg'''
-        import dlambda
-        dlambda.geom_nseg(self)
+        if nseg==0:
+            import dlambda
+            dlambda.geom_nseg(self)
+        else:
+            for sec in self.all:
+                sec.nseg=nseg
+            h.define_shape()    
 
     def __repr__(self):
         return "{}[{}]".format(self.name, self._gid)
