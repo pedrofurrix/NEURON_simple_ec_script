@@ -1,5 +1,5 @@
 from neuron import h
-import stim
+from . import stim
 import matplotlib.pyplot as plt
 
 

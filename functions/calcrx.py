@@ -89,7 +89,7 @@ def set_uniform_field_between_plates(v_plate,distance,field_orientation,ref_poin
     #e_field_strength - mV/um #to convert to V/m, multiply by 1e3 
 
 
-    e_field_strength=v_plate/distance*1e-3 #if V and d are in V/m #convert to mV/um
+    e_field_strength=v_plate/distance*1e-3 #if V and d are in V/m #convert to mV/um #checked
 
     # Set the zero potential reference at the 0 end of the soma
     #soma(0).e_extracellular = 0 
