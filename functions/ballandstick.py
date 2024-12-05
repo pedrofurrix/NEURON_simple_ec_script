@@ -69,7 +69,7 @@ class BallAndStick(Cell):
         self.dend = h.Section(name="dend", cell=self)
         self.dend.connect(self.soma)
         self.soma.L = self.soma.diam = 100*um
-        self.dend.L = 10000*um
+        self.dend.L = 5000*um
         self.dend.diam = 10*um
 
 
@@ -127,4 +127,18 @@ class BallAndStick_pas(Cell):
         # NEW: the synapse - definimos a localização da sinapse em cada célula da classe ball and stick
         self.syn = h.ExpSyn(self.dend(0.5))
         self.syn.tau = 2 * ms
+
+class BallAndStick2(BallAndStick):
+    name = "BallAndStick2"
+    
+    # def __init__(self):
+    #     super().__init__(gid, x, y, z, theta,nseg)
+    
+    def _setup_morphology(self):
+            super()._setup_morphology()  # Use the base class method for existing sections
+            self.dend2 = h.Section(name="dend2", cell=self)
+            self.dend2.connect(self.dend)
+            self.dend2.L = 5000*um
+            self.dend2.diam = 10*um
+            self.all = self.soma.wholetree()
 

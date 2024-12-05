@@ -48,13 +48,14 @@ def setrx1(xe,ye,ze): #x,y,z are the electrode coordinates #it's wrong, see the 
 
 
 def show_position(xe,ye,ze):
-    gElec = h.Shape(False)  # The 'False' argument ensures it's not immediately displayed
+    gElec = h.Shape()  # The 'False' argument ensures it's not immediately displayed
     # Set the view for the Shape object #The gElec.view() method sets the view parameters for the Shape. The arguments are:
     #The x and y coordinates of the bottom-left corner.
     #Width and height.
     #Position of the window on the screen (x and y).
     #Width and height of the window.
     gElec.view(-245.413, -250, 520.827, 520, 629, 104, 201.6, 201.28)
+    gElec.show(0)
     markers=[h.Section() for i in xe]
     pointprocess=[]
     for i,(x,y,z) in enumerate(zip(xe,ye,ze)):
@@ -63,11 +64,12 @@ def show_position(xe,ye,ze):
         markers[i].pt3dadd(x+0.5, y, z, 1)
         pointprocess.append(h.PointProcessMark(markers[i](0.5)))
         gElec.point_mark(pointprocess[i], 2)
-
+    return gElec
+    
 def setelec(xe,ye,ze):
     setrx1(xe,ye,ze)
-    show_position(xe,ye,ze)
-    return 1
+    plot=show_position(xe,ye,ze)
+    return plot
 
 def homogenous(rho,factor):
     for sec in h.allsec():
@@ -98,7 +100,7 @@ def set_uniform_field_between_plates(v_plate,distance,field_orientation,ref_poin
     
     # Loop over all segments to apply the extracellular field
     for sec in h.allsec():
-        if h.ismembrane("xtra"):
+        if h.ismembrane("xtra",sec=sec):
             for seg in sec:
 
                 # Calculate displacement from the zero potential reference
